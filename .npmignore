@@ -1,0 +1,16 @@
+node_modules
+.DS_Store
+dist
+*.local
+index.html
+.remote-assets
+.idea/
+components.d.ts
+.github
+.vscode
+.eslintrc
+global-bottom.vue
+pnpm-lock.yaml
+vite.config.ts
+example.md
+scripts/
