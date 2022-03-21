@@ -21,7 +21,7 @@ $ pnpm i slidev-theme-viplay
 
 This theme provides the following components:
 
-- **SlidesSubtitle** - provide subtitle and tts for slides, you can custome languages and tts models.
+- **SlidesSubtitle** - provide subtitle and tts for slides, you can custom languages and tts models.
   
 
 ## Usage

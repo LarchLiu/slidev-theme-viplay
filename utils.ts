@@ -7,13 +7,13 @@ import type { ResolvedSubtitlesConfig, Subtitles } from './types'
 
 export async function downloadTo(text: string, filepath: string, options: ResolvedSubtitlesConfig, lang: string): Promise<void> {
   const writer = createWriteStream(filepath)
-  let ttsCustome = ''
+  let ttsCustom = ''
 
-  for (const key in options.apiCustome)
-    ttsCustome += `&${key}=${options.apiCustome[key]}`
+  for (const key in options.apiCustom)
+    ttsCustom += `&${key}=${options.apiCustom[key]}`
 
   const response = await axios({
-    url: `${options.ttsApi}?format=${options.ext}&text=${text}&model=${lang}_${options.ttsModel[lang]}${ttsCustome}`,
+    url: `${options.ttsApi}?format=${options.ext}&text=${text}&model=${lang}_${options.ttsModel[lang]}${ttsCustom}`,
     method: 'GET',
     responseType: 'stream',
   })

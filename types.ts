@@ -1,5 +1,5 @@
 export interface SubtitlesConfig {
-  apiCustome?: Record<string, string>
+  apiCustom?: Record<string, string>
   background?: string
   color?: string
   noTTSDelay?: number
@@ -11,7 +11,7 @@ export interface SubtitlesConfig {
   ttsModel?: Record<string, string[]>
 }
 export interface ResolvedSubtitlesConfig {
-  apiCustome: Record<string, string>
+  apiCustom: Record<string, string>
   audioPath: string
   background: string
   color: string
@@ -24,7 +24,7 @@ export interface ResolvedSubtitlesConfig {
   ttsModel: Record<string, string[]>
 }
 const defaultConfig = {
-  apiCustome: {},
+  apiCustom: {},
   audioPath: 'public',
   background: '#00000088',
   color: '#ffffff',
