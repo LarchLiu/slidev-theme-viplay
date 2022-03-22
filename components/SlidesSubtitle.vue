@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
-import { clicks, currentPage, hasNext, next } from '@slidev/client/logic/nav'
-import MenuButton from '@slidev/client/internals/MenuButton.vue'
+import { clicks, currentPage, go, hasNext, next } from '@slidev/client/logic/nav'
 import type { Subtitles } from '../types'
-import { audioSrc, ccDisplay, currentTTSLang, currentTTSModel, isFirstTime, isPlay } from '../logic/subtitle'
+import { audioSrc, ccDisplay, currentTTSLang, currentTTSModel, isFirstTime, isPlay, subtitlesConfig } from '../logic/subtitle'
 // import { downloadTTS } from '../utils'
 
 const props = defineProps<{ subtitles: Subtitles }>()
@@ -22,11 +21,9 @@ const subtitleDisplay = ref(false)
 const curSubtitle = ref('')
 const delay = ref(0)
 const audio = ref()
-const buttonDisplay = ref(true)
 const language = computed(() => currentTTSLang.value)
 const page = computed(() => `page${currentPage.value}`)
 const click = computed(() => `click${clicks.value}`)
-const ttsStyle = computed(() => buttonDisplay.value ? 'mb-10' : 'mb-0')
 let timer = 0
 
 const parseSubtitle = () => {
@@ -40,10 +37,11 @@ const parseSubtitle = () => {
 
 const createTimer = () => {
   timer = window.setTimeout(() => {
-    if (!hasNext.value)
+    if (!hasNext.value) {
       isPlay.value = false
-    else
-      next()
+      go(1)
+    }
+    else { next() }
   }, noTTSDelay)
 }
 
@@ -108,7 +106,7 @@ const onAudioEnded = () => {
 const play = () => {
   if (audio.value) {
     if (curSubtitle.value) {
-      audio.value.src = audioSrc(config.value, curSubtitle.value)
+      audio.value.src = audioSrc(curSubtitle.value)
       subtitleDisplay.value = true
       audio.value.play()
     }
@@ -149,45 +147,16 @@ watch([currentTTSLang, currentTTSModel], () => {
 })
 onMounted(async() => {
   // await downloadTTS(props.subtitles)
-  window.setTimeout(() => {
-    buttonDisplay.value = false
-  }, 2000)
+  subtitlesConfig.value = config.value
   initSubtitle()
 })
 </script>
 
 <template>
   <div class="abs-b text-center">
-    <div v-if="contents && contents[language] && contents[language][page] && contents[language][page][click]" :class="ttsStyle">
+    <div v-if="contents && contents[language] && contents[language][page] && contents[language][page][click]">
       <span v-if="subtitleDisplay && ccDisplay && curSubtitle" class="px-2" :style="{background, color, fontSize}">{{ curSubtitle }}</span>
       <audio ref="audio" @ended="onAudioEnded" />
-    </div>
-    <div
-      class="abs-b m-auto w-40 opacity-0 hover:opacity-100"
-      :class="buttonDisplay ? 'opacity-100' : 'opacity-0'"
-      @mouseenter="buttonDisplay = true" @mouseleave="buttonDisplay = false"
-    >
-      <div class="flex flex-wrap-reverse text-l gap-1 justify-center">
-        <MenuButton>
-          <template #button>
-            <button class="icon-btn">
-              <ic-outline-subtitles v-if="ccDisplay" />
-              <ic-outline-subtitles-off v-else />
-            </button>
-          </template>
-          <template #menu>
-            <LanguageList :config="config" />
-          </template>
-        </MenuButton>
-        <button
-          class="icon-btn"
-          title="Toggle dark mode"
-          @click="isPlay = !isPlay"
-        >
-          <carbon-pause v-if="isPlay" />
-          <carbon-play v-else />
-        </button>
-      </div>
     </div>
   </div>
 </template>
