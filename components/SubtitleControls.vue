@@ -7,7 +7,7 @@ import LanguageList from './LanguageList.vue'
 <template>
   <MenuButton>
     <template #button>
-      <button class="icon-btn">
+      <button class="icon-btn" title="Subtitles">
         <ic-outline-subtitles v-if="ccDisplay" />
         <ic-outline-subtitles-off v-else />
       </button>
@@ -18,7 +18,7 @@ import LanguageList from './LanguageList.vue'
   </MenuButton>
   <button
     class="icon-btn"
-    title="Toggle dark mode"
+    :title="isPlay ? 'Pause' : 'Play'"
     @click="isPlay = !isPlay"
   >
     <carbon-pause v-if="isPlay" />

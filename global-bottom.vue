@@ -75,4 +75,5 @@ const subtitles = new Subtitles(contents, config)
 </script>
 <template>
   <slides-subtitle :subtitles="subtitles" />
+  <live-avatar />
 </template>

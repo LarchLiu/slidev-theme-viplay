@@ -29,6 +29,9 @@
     "axios": "^0.21.1",
     "blueimp-md5": "^2.18.0",
     "codemirror-theme-vars": "^0.1.1",
+    "kalidokit": "^1.1.5",
+    "pixi-live2d-display": "^0.3.1",
+    "pixi.js": "^6.2.2",
     "prism-theme-vars": "^0.2.2",
     "theme-vitesse": "^0.1.14",
     "vue": "^3.2.10"
@@ -59,7 +62,7 @@
   },
   "engines": {
     "node": ">=14.0.0",
-    "slidev": ">=0.19.3"
+    "slidev": ">=0.29.0"
   },
   "//": "Learn more: https://sli.dev/themes/write-a-theme.html",
   "slidev": {

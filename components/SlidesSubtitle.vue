@@ -2,7 +2,7 @@
 import { computed, onMounted, ref, watch } from 'vue'
 import { clicks, currentPage, go, hasNext, next } from '@slidev/client/logic/nav'
 import type { Subtitles } from '../types'
-import { audioSrc, ccDisplay, currentTTSLang, currentTTSModel, isFirstTime, isPlay, subtitlesConfig } from '../logic/subtitle'
+import { audioSrc, ccDisplay, currentTTSLang, currentTTSModel, existSubtitle, isFirstTime, isPlay, subtitlesConfig } from '../logic/subtitle'
 // import { downloadTTS } from '../utils'
 
 const props = defineProps<{ subtitles: Subtitles }>()
@@ -147,6 +147,7 @@ watch([currentTTSLang, currentTTSModel], () => {
 })
 onMounted(async() => {
   // await downloadTTS(props.subtitles)
+  existSubtitle.value = true
   subtitlesConfig.value = config.value
   initSubtitle()
 })
