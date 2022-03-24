@@ -1,6 +1,6 @@
 {
   "name": "slidev-theme-viplay",
-  "version": "0.0.4-beta.3",
+  "version": "0.0.4-beta.4",
   "private": false,
   "description": "Some components for slidev",
   "bugs": "https://github.com/LarchLiu/slidev-theme-viplay/issues",
@@ -22,19 +22,18 @@
     "release": "zx scripts/release.mjs",
     "ci:publish": "zx scripts/publish.mjs"
   },
+  "peerDependencies": {
+    "kalidokit": "^1.1.5",
+    "pixi-live2d-display": "^0.3.1",
+    "pixi.js": "^6.2.2"
+  },
   "dependencies": {
     "@iconify-json/ic": "^1.1.2",
     "@slidev/types": "^0.29.0",
     "@vueuse/core": "^8.1.2",
-    "axios": "^0.21.1",
-    "blueimp-md5": "^2.18.0",
     "codemirror-theme-vars": "^0.1.1",
-    "kalidokit": "^1.1.5",
-    "pixi-live2d-display": "^0.3.1",
-    "pixi.js": "^6.2.2",
     "prism-theme-vars": "^0.2.2",
-    "theme-vitesse": "^0.1.14",
-    "vue": "^3.2.10"
+    "theme-vitesse": "^0.1.14"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.18.0",
@@ -42,22 +41,18 @@
     "@antfu/utils": "^0.3.0",
     "@slidev/cli": "^0.29.0",
     "@slidev/client": "^0.29.0",
-    "@types/blueimp-md5": "^2.18.0",
     "@types/fs-extra": "^9.0.12",
     "@types/node": "^16.7.13",
     "bumpp": "^7.1.1",
     "conventional-changelog-cli": "^2.1.1",
     "eslint": "^8.6.1",
-    "esno": "^0.9.1",
-    "fast-glob": "^3.2.7",
     "fs-extra": "^10.0.0",
-    "husky": "4.3.7",
-    "lint-staged": "^11.1.2",
-    "playwright-chromium": "^1.20.0",
-    "prompts": "^2.4.1",
-    "taze": "^0.4.5",
+    "kalidokit": "^1.1.5",
+    "pixi-live2d-display": "^0.3.1",
+    "pixi.js": "^6.2.2",
     "typescript": "^4.6.2",
     "vite": "^2.8.6",
+    "vue": "^3.2.10",
     "zx": "^4.2.0"
   },
   "engines": {

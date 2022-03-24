@@ -13,7 +13,7 @@ import LanguageList from './LanguageList.vue'
       </button>
     </template>
     <template #menu>
-      <LanguageList :config="subtitlesConfig" />
+      <LanguageList :config="subtitlesConfig!" />
     </template>
   </MenuButton>
   <button

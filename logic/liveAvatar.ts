@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { useStorage } from '@vueuse/core'
-import _serverVitarState from 'server-reactive:vitar?diff'
+import _serverVitarState from 'server-reactive:vitar'
 import type { ServerReactive } from 'vite-plugin-vue-server-ref'
 
 interface ServerVitarState {

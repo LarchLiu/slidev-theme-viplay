@@ -1,16 +1,7 @@
 import { defineConfig } from 'vite'
-// import { sync } from './logic/liveAvatar'
 
 export default defineConfig({
-  server: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3000',
-        changeOrigin: true,
-        rewrite: path => path.replace(/^\/api/, '/api/v1/'),
-      },
-    },
-  },
+  // @ts-expect-error missing types
   slidev: {
     serverRef: {
       state: {
@@ -21,8 +12,6 @@ export default defineConfig({
       },
       // onChanged: (name, data, patch) => {
       //   if (name === 'vitar' && data.sync)
-      //   // sync.value = true
-
       //     console.log(patch)
       // },
     },

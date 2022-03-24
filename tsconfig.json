@@ -19,9 +19,10 @@
     ],
   },
   "include": [
+    "./components/*.vue",
     "./logic/*.ts",
     "./*.ts",
-    "vite.config.js",
+    "./*.vue",
   ],
   "exclude": ["**/dist/**", "node_modules"]
 }

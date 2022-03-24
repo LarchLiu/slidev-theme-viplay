@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref, watch } from 'vue'
 import { isPresenter } from '@slidev/client/logic/nav'
-import { Live2DModel } from 'pixi-live2d-display'
-import { Application } from '@pixi/app'
-import { Ticker, TickerPlugin } from '@pixi/ticker'
 import { displayModel, existAvatar, modelType, serverVitarState } from '../logic/liveAvatar'
 import Vitar from './Vitar.vue'
+
+const isDev = import.meta.env.MODE === 'development'
 
 const modelUrl = ref('')
 const displayOpt = reactive({
@@ -48,13 +47,14 @@ watch(modelType, () => {
   setModel(modelType.value)
 })
 onMounted(() => {
-  existAvatar.value = true
+  if (isDev)
+    existAvatar.value = true
   if (serverVitarState.sync)
     displayModel.value = 1
 })
 </script>
 <template>
-  <div v-if="displayModel">
+  <div v-if="isDev && displayModel">
     <vitar :model-opt="modelUrl" :media-pipe="isPresenter" :display-opt="displayOpt" />
   </div>
 </template>

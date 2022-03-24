@@ -72,11 +72,11 @@ const frameStyle = computed(() => ({
 }))
 
 const handleStyle = computed(() => ({
-  width: '10px',
-  height: '10px',
+  width: '8px',
+  height: '8px',
   // 0.5 + 0.5 / sqrt(2)
-  top: `${size.value * 0.8536 - 5}px`,
-  left: `${size.value * 0.8536 - 5}px`,
+  top: `${size.value * 0.8536 - 4}px`,
+  left: `${size.value * 0.8536 - 4}px`,
   cursor: 'nwse-resize',
 }))
 
@@ -112,6 +112,7 @@ async function initLive2D() {
     modelSize.value = Math.min(width, height)
 
     pixiApp = new Application({
+      backgroundColor: 0xFFFFFF,
       backgroundAlpha: 0,
       autoStart: true,
       width: modelSize.value,
@@ -282,7 +283,7 @@ async function initMediapipe() {
   camView.value!.style.visibility = props.showCam ? 'visible' : 'hidden'
 
   faceMesh = new mpFaceMesh.FaceMesh({
-    locateFile: (file) => {
+    locateFile: (file:string) => {
       return `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh@${mpFaceMesh.VERSION}/${file}`
     },
   })
@@ -309,7 +310,7 @@ async function initMediapipe() {
 }
 
 function getElementContent() {
-  const content = document.getElementById('slide-content')
+  const content = document.getElementById('slide-content')!
   offsetLeft = content.getBoundingClientRect().left
   offsetTop = content.getBoundingClientRect().top
 }
