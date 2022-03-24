@@ -112,7 +112,6 @@ async function initLive2D() {
     modelSize.value = Math.min(width, height)
 
     pixiApp = new Application({
-      backgroundColor: 0xFFFFFF,
       backgroundAlpha: 0,
       autoStart: true,
       width: modelSize.value,
