@@ -282,7 +282,7 @@ async function initMediapipe() {
   camView.value!.style.visibility = props.showCam ? 'visible' : 'hidden'
 
   faceMesh = new mpFaceMesh.FaceMesh({
-    locateFile: (file:string) => {
+    locateFile: (file: string) => {
       return `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh@${mpFaceMesh.VERSION}/${file}`
     },
   })

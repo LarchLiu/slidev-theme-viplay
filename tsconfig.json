@@ -14,7 +14,6 @@
     "forceConsistentCasingInFileNames": true,
     "types": [
       "vite/client",
-      "node",
       "vite-plugin-vue-server-ref/module"
     ],
   },
