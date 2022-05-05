@@ -17,6 +17,9 @@
       "vite-plugin-vue-server-ref/module"
     ],
   },
+  "vueCompilerOptions": {
+    "experimentalDisableTemplateSupport": true
+  },
   "include": [
     "./components/*.vue",
     "./logic/*.ts",

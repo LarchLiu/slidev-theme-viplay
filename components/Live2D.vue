@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { slideHeight, slideWidth } from '@slidev/client/env'
 import { Live2DModel } from 'pixi-live2d-display'
-import { Application } from '@pixi/app'
-import { Ticker, TickerPlugin } from '@pixi/ticker'
+// import { Application } from '@pixi/app'
+// import { Ticker, TickerPlugin } from '@pixi/ticker'
 import type { TFace } from 'kalidokit'
 import { Face, Vector } from 'kalidokit'
 import { useDraggable, useStorage } from '@vueuse/core'
@@ -11,6 +11,7 @@ import { injectionSlideScale } from '@slidev/client/constants'
 import { isPresenter } from '@slidev/client/logic/nav'
 import { pluginRegisted, serverVitarState } from '../logic/liveAvatar'
 
+const { Application } = (window as any).PIXI
 const scale = inject(injectionSlideScale)!
 
 const props = defineProps({
@@ -82,7 +83,7 @@ const handleStyle = computed(() => ({
 
 // const modelUrl = '/models/hiyori/hiyori_pro_t10.model3.json'
 let currentModel: any
-let pixiApp: Application
+let pixiApp: typeof Application
 const modelUrl = computed(() =>
   typeof props.model === 'string'
     ? props.model
@@ -124,6 +125,7 @@ async function initLive2D() {
     currentModel.buttonMode = true
     currentModel.interactive = true
 
+    pixiApp.renderer.plugins.interaction.destroy()
     // currentModel.on('pointerdown', () => {
     //   // camView.value.style.visibility = showGuides.value ? 'visible' : 'hidden';
     // })
@@ -360,11 +362,11 @@ watch(serverVitarState, (v) => {
 
 onMounted(async() => {
   // register the Ticker to support automatic updating of Live2D models
-  if (!pluginRegisted.value) {
+  if (!pluginRegisted.value)
     pluginRegisted.value = true
-    Application.registerPlugin(TickerPlugin)
-    Live2DModel.registerTicker(Ticker)
-  }
+    // Application.registerPlugin(TickerPlugin)
+    // Live2DModel.registerTicker(Ticker)
+
   getElementContent()
   await initLive2D()
   await initMediapipe()

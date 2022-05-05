@@ -4,16 +4,16 @@
   "private": false,
   "description": "Some components for slidev",
   "bugs": "https://github.com/LarchLiu/slidev-theme-viplay/issues",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/LarchLiu/slidev-theme-viplay.git"
-  },
-  "author": "alex <larch.liu@gmail.com>",
   "keywords": [
     "slidev-theme",
     "slidev",
     "viplay"
   ],
+  "author": "alex <larch.liu@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LarchLiu/slidev-theme-viplay.git"
+  },
   "scripts": {
     "build": "slidev build example.md",
     "dev": "slidev example.md --open",
@@ -24,14 +24,12 @@
   },
   "peerDependencies": {
     "kalidokit": "^1.1.5",
-    "pixi-live2d-display": "^0.3.1",
-    "pixi.js": "^6.2.2"
+    "pixi-live2d-display": "^0.3.1"
   },
   "dependencies": {
     "codemirror-theme-vars": "^0.1.1",
     "kalidokit": "^1.1.5",
     "pixi-live2d-display": "^0.3.1",
-    "pixi.js": "^6.2.2",
     "prism-theme-vars": "^0.2.2",
     "theme-vitesse": "^0.1.14"
   },

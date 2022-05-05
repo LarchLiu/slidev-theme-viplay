@@ -3,6 +3,7 @@ import { useScriptTag } from '@vueuse/core'
 import { getCurrentInstance, onMounted, ref, shallowRef, watch } from 'vue'
 
 const isLive2dLoad = ref(false)
+const isPixiLoad = ref(false)
 const isCubismLoad = ref(false)
 const isFaceMeshLoad = ref(false)
 const isCameraUtilsLoad = ref(false)
@@ -49,7 +50,7 @@ async function create() {
     import('./Live2D.vue').then(v => Live2DLayer.value = v.default)
 }
 
-if (props.mediaPipe && (window as any).FaceMesh && (window as any).Camera && (window as any).drawConnectors && (window as any).Live2D && (window as any).Live2DCubismCore) {
+if (props.mediaPipe && (window as any).PIXI && (window as any).FaceMesh && (window as any).Camera && (window as any).drawConnectors && (window as any).Live2D && (window as any).Live2DCubismCore) {
   onMounted(create)
 }
 else {
@@ -88,7 +89,14 @@ else {
     isDrawingUtilsLoad.value = true
   }
 
-  if (props.modelOpt && (!(window as any).Live2D || !(window as any).Live2DCubismCore)) {
+  if (props.modelOpt && (!(window as any).Live2D || !(window as any).Live2DCubismCore || !(window as any).PIXI)) {
+    useScriptTag(
+      'https://cdn.jsdelivr.net/npm/pixi.js@6.2.2/dist/browser/pixi.min.js',
+      () => {
+        isPixiLoad.value = true
+      },
+      { async: true, crossOrigin: 'anonymous' },
+    )
     useScriptTag(
       'https://cdn.jsdelivr.net/gh/dylanNew/live2d/webgl/Live2D/lib/live2d.min.js',
       () => {
@@ -107,9 +115,10 @@ else {
   else {
     isLive2dLoad.value = true
     isCubismLoad.value = true
+    isPixiLoad.value = true
   }
 
-  if (isLive2dLoad.value && isCubismLoad.value && isFaceMeshLoad.value && isCameraUtilsLoad.value && isDrawingUtilsLoad.value && !Live2DLayer.value) {
+  if (isPixiLoad.value && isLive2dLoad.value && isCubismLoad.value && isFaceMeshLoad.value && isCameraUtilsLoad.value && isDrawingUtilsLoad.value && !Live2DLayer.value) {
     if (vm.isMounted)
       create()
     else
@@ -117,8 +126,8 @@ else {
   }
 }
 
-watch([isLive2dLoad, isCubismLoad, isFaceMeshLoad, isCameraUtilsLoad, isDrawingUtilsLoad], () => {
-  if (isLive2dLoad.value && isCubismLoad.value && isFaceMeshLoad.value && isCameraUtilsLoad.value && isDrawingUtilsLoad.value && !Live2DLayer.value) {
+watch([isLive2dLoad, isCubismLoad, isFaceMeshLoad, isCameraUtilsLoad, isDrawingUtilsLoad, isPixiLoad], () => {
+  if (isPixiLoad.value && isLive2dLoad.value && isCubismLoad.value && isFaceMeshLoad.value && isCameraUtilsLoad.value && isDrawingUtilsLoad.value && !Live2DLayer.value) {
     if (vm.isMounted)
       create()
     else
