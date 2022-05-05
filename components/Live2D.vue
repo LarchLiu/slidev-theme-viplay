@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { slideHeight, slideWidth } from '@slidev/client/env'
-import { Live2DModel } from 'pixi-live2d-display'
+// import { Live2DModel } from 'pixi-live2d-display'
 // import { Application } from '@pixi/app'
 // import { Ticker, TickerPlugin } from '@pixi/ticker'
 import type { TFace } from 'kalidokit'
@@ -11,7 +11,7 @@ import { injectionSlideScale } from '@slidev/client/constants'
 import { isPresenter } from '@slidev/client/logic/nav'
 import { pluginRegisted, serverVitarState } from '../logic/liveAvatar'
 
-const { Application } = (window as any).PIXI
+const { Application, live2d: { Live2DModel } } = (window as any).PIXI
 const scale = inject(injectionSlideScale)!
 
 const props = defineProps({
