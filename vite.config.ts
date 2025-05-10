@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  // @ts-expect-error missing types
   slidev: {
     serverRef: {
       state: {

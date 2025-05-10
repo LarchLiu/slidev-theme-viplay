@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref, watch } from 'vue'
-import { isPresenter } from '@slidev/client/logic/nav'
+import { useNav } from '@slidev/client'
 import { displayModel, existAvatar, modelType, serverVitarState } from '../logic/liveAvatar'
 import Vitar from './Vitar.vue'
 
 const isDev = import.meta.env.MODE === 'development'
 
+const { isPresenter } = useNav()
 const modelUrl = ref('')
 const displayOpt = reactive({
   scale: 2,

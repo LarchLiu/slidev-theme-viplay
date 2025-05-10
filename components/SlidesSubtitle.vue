@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
-import { clicks, currentPage, go, hasNext, next } from '@slidev/client/logic/nav'
+import { useNav } from '@slidev/client'
 import type { Subtitles } from '../types'
 import { audioSrc, ccDisplay, currentTTSLang, currentTTSModel, existSubtitle, isFirstTime, isPlay, subtitlesConfig } from '../logic/subtitle'
 // import { downloadTTS } from '../utils'
@@ -15,6 +15,7 @@ const {
   fontSize,
 } = config.value
 
+const { clicks, currentPage, go, hasNext, next } = useNav()
 const subtitleIdx = ref(-1)
 const subtitleCount = ref(0)
 const subtitleDisplay = ref(false)

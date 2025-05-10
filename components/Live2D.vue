@@ -1,18 +1,16 @@
 <script setup lang="ts">
-import { slideHeight, slideWidth } from '@slidev/client/env'
+import { slideHeight, slideWidth, useNav, useSlideContext } from '@slidev/client'
 import { Live2DModel } from 'pixi-live2d-display'
 // import { Application } from '@pixi/app'
 // import { Ticker, TickerPlugin } from '@pixi/ticker'
 import type { TFace } from 'kalidokit'
 import { Face, Vector } from 'kalidokit'
 import { useDraggable, useStorage } from '@vueuse/core'
-import { computed, inject, nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
-import { injectionSlideScale } from '@slidev/client/constants'
-import { isPresenter } from '@slidev/client/logic/nav'
+import { computed, nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 import { pluginRegisted, serverVitarState } from '../logic/liveAvatar'
 
 const { Application } = (window as any).PIXI
-const scale = inject(injectionSlideScale)!
+// const scale = inject(injectionSlideScale)!
 
 const props = defineProps({
   model: [Boolean, String],
@@ -24,6 +22,8 @@ const props = defineProps({
 })
 
 const { lerp } = Vector
+const { isPresenter } = useNav()
+const { $scale: scale } = useSlideContext()
 
 let mpCamera: any
 let mpDrawing: any
@@ -32,10 +32,10 @@ let faceMesh: any
 let camera: any
 
 const minSize = 80
-const size = useStorage('live-model-size', Math.round(Math.max(minSize, (slideWidth) / 8)))
+const size = useStorage('live-model-size', Math.round(Math.max(minSize, (slideWidth.value) / 8)))
 const position = ref({
-  x: (slideWidth - size.value - 20) * scale.value,
-  y: (slideHeight - size.value - 20) * scale.value,
+  x: (slideWidth.value - size.value - 20) * scale.value,
+  y: (slideHeight.value - size.value - 20) * scale.value,
 })
 const container = ref<HTMLDivElement | undefined>()
 const frame = ref<HTMLDivElement | undefined>()
@@ -348,8 +348,8 @@ watch(display, () => {
 watch(scale, () => {
   nextTick(() => {
     getElementContent()
-    position.value.x = (slideWidth - size.value - 20) * scale.value + offsetLeft
-    position.value.y = (slideHeight - size.value - 20) * scale.value + offsetTop
+    position.value.x = (slideWidth.value - size.value - 20) * scale.value + offsetLeft
+    position.value.y = (slideHeight.value - size.value - 20) * scale.value + offsetTop
   })
 })
 

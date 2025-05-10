@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { useStorage } from '@vueuse/core'
+// @ts-expect-error - virtual module
 import _serverVitarState from 'server-reactive:vitar'
 import type { ServerReactive } from 'vite-plugin-vue-server-ref'
 
