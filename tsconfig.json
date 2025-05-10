@@ -5,6 +5,7 @@
     "target": "es2016",
     "lib": ["DOM", "ESNext"],
     "strict": true,
+    "jsx": "preserve",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "noUnusedLocals": true,
@@ -16,9 +17,6 @@
       "vite/client",
       "vite-plugin-vue-server-ref/module"
     ],
-  },
-  "vueCompilerOptions": {
-    "experimentalDisableTemplateSupport": true
   },
   "include": [
     "./components/*.vue",
