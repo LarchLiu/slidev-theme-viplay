@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import SelectList from '@slidev/client/internals/SelectList.vue'
 import type { SelectionItem } from '@slidev/client/internals/types'
-import { displayModel, modelType, models } from '../logic/liveAvatar'
+import SelectList from '@slidev/client/internals/SelectList.vue'
+import { computed } from 'vue'
+import { displayModel, models, modelType } from '../logic/liveAvatar'
 
 const modelItems = computed<SelectionItem<string>[]>(() => [
   ...models.map(v => ({

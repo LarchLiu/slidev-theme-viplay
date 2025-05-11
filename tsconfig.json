@@ -1,28 +1,28 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
-    "baseUrl": ".",
     "target": "es2016",
-    "lib": ["DOM", "ESNext"],
-    "strict": true,
     "jsx": "preserve",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "noUnusedLocals": true,
+    "lib": ["DOM", "ESNext"],
+    "baseUrl": ".",
+    "module": "ESNext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "strictNullChecks": true,
-    "forceConsistentCasingInFileNames": true,
     "types": [
       "vite/client",
-      "vite-plugin-vue-server-ref",
+      "vite-plugin-vue-server-ref"
     ],
+    "strict": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
   },
   "include": [
     "./components/*.vue",
     "./logic/*.ts",
     "./*.ts",
-    "./*.vue",
+    "./*.vue"
   ],
   "exclude": ["**/dist/**", "node_modules"]
 }

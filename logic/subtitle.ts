@@ -1,7 +1,7 @@
+import type { ResolvedSubtitlesConfig } from 'types'
+import { useStorage } from '@vueuse/core'
 // import md5 from 'blueimp-md5'
 import { ref } from 'vue'
-import { useStorage } from '@vueuse/core'
-import type { ResolvedSubtitlesConfig } from 'types'
 
 export const isFirstTime = ref(true)
 export const isPlay = ref(false)

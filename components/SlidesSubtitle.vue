@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from 'vue'
-import { useNav } from '@slidev/client'
 import type { Subtitles } from '../types'
+import { useNav } from '@slidev/client'
+import { computed, onMounted, ref, watch } from 'vue'
 import { audioSrc, ccDisplay, currentTTSLang, currentTTSModel, existSubtitle, isFirstTime, isPlay, subtitlesConfig } from '../logic/subtitle'
 // import { downloadTTS } from '../utils'
 
@@ -27,16 +27,16 @@ const page = computed(() => `page${currentPage.value}`)
 const click = computed(() => `click${clicks.value}`)
 let timer = 0
 
-const parseSubtitle = () => {
+function parseSubtitle() {
   const arr = contents.value[language.value][page.value][click.value][subtitleIdx.value].split('/D/')
   curSubtitle.value = arr[0].trim()
   if (arr[1])
-    delay.value = parseInt(arr[1])
+    delay.value = Number.parseInt(arr[1])
   else
     delay.value = 1000
 }
 
-const createTimer = () => {
+function createTimer() {
   timer = window.setTimeout(() => {
     if (!hasNext.value) {
       isPlay.value = false
@@ -46,7 +46,7 @@ const createTimer = () => {
   }, noTTSDelay)
 }
 
-const initSubtitle = () => {
+function initSubtitle() {
   subtitleIdx.value = -1
   if (timer)
     clearTimeout(timer)
@@ -65,7 +65,7 @@ const initSubtitle = () => {
     createTimer()
 }
 
-const resetSubtitle = () => {
+function resetSubtitle() {
   if (timer)
     clearTimeout(timer)
   if (contents.value
@@ -86,7 +86,7 @@ const resetSubtitle = () => {
     createTimer()
 }
 
-const onAudioEnded = () => {
+function onAudioEnded() {
   subtitleDisplay.value = false
   if (isFirstTime.value)
     isFirstTime.value = false
@@ -104,7 +104,7 @@ const onAudioEnded = () => {
   }, delay.value)
 }
 
-const play = () => {
+function play() {
   if (audio.value) {
     if (curSubtitle.value) {
       audio.value.src = audioSrc(curSubtitle.value)
@@ -120,7 +120,7 @@ const play = () => {
   }
 }
 
-const pause = () => {
+function pause() {
   if (audio.value)
     audio.value.pause()
 
@@ -146,7 +146,7 @@ watch([currentTTSLang, currentTTSModel], () => {
     isPlay.value = false
   resetSubtitle()
 })
-onMounted(async() => {
+onMounted(async () => {
   // await downloadTTS(props.subtitles)
   existSubtitle.value = true
   subtitlesConfig.value = config.value
@@ -157,7 +157,7 @@ onMounted(async() => {
 <template>
   <div class="abs-b text-center">
     <div v-if="contents && contents[language] && contents[language][page] && contents[language][page][click]">
-      <span v-if="subtitleDisplay && ccDisplay && curSubtitle" class="px-2" :style="{background, color, fontSize}">{{ curSubtitle }}</span>
+      <span v-if="subtitleDisplay && ccDisplay && curSubtitle" class="px-2" :style="{ background, color, fontSize }">{{ curSubtitle }}</span>
       <audio ref="audio" @ended="onAudioEnded" />
     </div>
   </div>

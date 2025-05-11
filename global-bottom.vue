@@ -1,7 +1,6 @@
 <script setup lang="ts">
 // import type { ServerReactive } from 'vite-plugin-vue-server-ref'
-// @ts-expect-error - virtual module
-import _serverVitarState from 'server-reactive:vitar'
+// import _serverVitarState from 'server-reactive:vitar'
 // import type { ServerVitarState } from './types'
 import { Subtitles } from './types'
 
@@ -79,6 +78,7 @@ const config = {
 }
 const subtitles = new Subtitles(contents, config)
 </script>
+
 <template>
   <slides-subtitle :subtitles="subtitles" />
   <!-- <live-avatar :vitar-state="serverVitarState" /> -->

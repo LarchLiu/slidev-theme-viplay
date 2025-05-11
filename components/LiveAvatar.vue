@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { onMounted, provide, reactive, ref, watch } from 'vue'
-import { useNav } from '@slidev/client'
-import type { ServerReactive } from 'vite-plugin-vue-server-ref'
 import type { ServerVitarState } from 'types'
+import type { ServerReactive } from 'vite-plugin-vue-server-ref'
+import { useNav } from '@slidev/client'
+import { onMounted, provide, reactive, ref, watch } from 'vue'
 import { displayModel, existAvatar, modelType } from '../logic/liveAvatar'
 import Vitar from './Vitar.vue'
 
-const isDev = import.meta.env.MODE === 'development'
-
 const props = defineProps<{ vitarState: ServerReactive<ServerVitarState> }>()
+
+const isDev = import.meta.env.MODE === 'development'
 
 provide('vitarState', props.vitarState)
 
@@ -19,7 +19,7 @@ const displayOpt = reactive({
   offsetX: 0,
   offsetY: 0,
 })
-const setModel = (name: string) => {
+function setModel(name: string) {
   modelUrl.value = `https://raw.githubusercontent.com/Live2D/CubismWebSamples/develop/Samples/Resources/${name}/${name}.model3.json`
   if (name === 'Rice') {
     displayOpt.scale = 2.1
@@ -60,8 +60,9 @@ onMounted(() => {
     displayModel.value = 1
 })
 </script>
+
 <template>
   <div v-if="isDev && displayModel">
-    <vitar :model-opt="modelUrl" :media-pipe="isPresenter" :display-opt="displayOpt" />
+    <Vitar :model-opt="modelUrl" :media-pipe="isPresenter" :display-opt="displayOpt" />
   </div>
 </template>

@@ -8,7 +8,7 @@ import AvatarModelsListVue from './AvatarModelsList.vue'
   <MenuButton>
     <template #button>
       <button class="icon-btn" title="Live Avatar">
-        <carbon-airline-passenger-care :style="{opacity: displayModel ? 1 : 0.4}" />
+        <carbon-airline-passenger-care :style="{ opacity: displayModel ? 1 : 0.4 }" />
       </button>
     </template>
     <template #menu>

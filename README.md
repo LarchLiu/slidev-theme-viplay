@@ -5,15 +5,20 @@
 Some components for [Slidev](https://github.com/slidevjs/slidev).
 
 ## Installation
-``` bash
+
+```bash
 $ npm i slidev-theme-viplay --save
 ```
+
 or
-``` bash
+
+```bash
 $ yarn add slidev-theme-viplay
 ```
+
 or
-``` bash
+
+```bash
 $ pnpm i slidev-theme-viplay
 ```
 
@@ -22,13 +27,13 @@ $ pnpm i slidev-theme-viplay
 This theme provides the following components:
 
 - **SlidesSubtitle** - provide subtitle and tts for slides, you can custom languages and tts models.
-  
 
 ## Usage
 
 ### SlidesSubtitle
 
 Create a `./global-bottom.vue` file in your `Slidev` project and use the component:
+
 ```vue
 <script setup lang="ts">
 import { Subtitles } from 'slidev-theme-viplay/types'
@@ -62,11 +67,11 @@ const config = {
 }
 const subtitles = new Subtitles(contents, config)
 </script>
+
 <template>
   <slides-subtitle :subtitles="subtitles" />
 </template>
 ```
-
 
 ## Contributing
 

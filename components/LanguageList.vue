@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
-import SelectList from '@slidev/client/internals/SelectList.vue'
 import type { SelectionItem } from '@slidev/client/internals/types'
-import { ccDisplay, currentTTSLang, currentTTSModel } from '../logic/subtitle'
 import type { ResolvedSubtitlesConfig } from '../types'
+import SelectList from '@slidev/client/internals/SelectList.vue'
+import { computed, onMounted } from 'vue'
+import { ccDisplay, currentTTSLang, currentTTSModel } from '../logic/subtitle'
 
 const props = defineProps<{ config: ResolvedSubtitlesConfig }>()
-const getLangName = (str: string) => {
+function getLangName(str: string) {
   return props.config.ttsLangName[str] || str
 }
 

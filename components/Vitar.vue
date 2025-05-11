@@ -2,14 +2,6 @@
 import { useScriptTag } from '@vueuse/core'
 import { getCurrentInstance, onMounted, ref, shallowRef, watch } from 'vue'
 
-const isLive2dLoad = ref(false)
-const isPixiLoad = ref(false)
-const isCubismLoad = ref(false)
-const isFaceMeshLoad = ref(false)
-const isCameraUtilsLoad = ref(false)
-const isDrawingUtilsLoad = ref(false)
-const Live2DLayer = shallowRef<any>()
-
 const props = defineProps({
   modelOpt: {
     type: [Boolean, String],
@@ -42,6 +34,13 @@ const props = defineProps({
     },
   },
 })
+const isLive2dLoad = ref(false)
+const isPixiLoad = ref(false)
+const isCubismLoad = ref(false)
+const isFaceMeshLoad = ref(false)
+const isCameraUtilsLoad = ref(false)
+const isDrawingUtilsLoad = ref(false)
+const Live2DLayer = shallowRef<any>()
 
 const vm = getCurrentInstance()!
 

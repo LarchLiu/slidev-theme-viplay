@@ -1,17 +1,16 @@
 <script setup lang="ts">
-import { slideHeight, slideWidth, useNav, useSlideContext } from '@slidev/client'
-import { Live2DModel } from 'pixi-live2d-display'
 // import { Application } from '@pixi/app'
 // import { Ticker, TickerPlugin } from '@pixi/ticker'
 import type { TFace } from 'kalidokit'
-import { Face, Vector } from 'kalidokit'
-import { useDraggable, useStorage } from '@vueuse/core'
-import { computed, inject, nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
-import type { ServerReactive } from 'vite-plugin-vue-server-ref'
 import type { ServerVitarState } from 'types'
+import type { ServerReactive } from 'vite-plugin-vue-server-ref'
+import { slideHeight, slideWidth, useNav, useSlideContext } from '@slidev/client'
+import { useDraggable, useStorage } from '@vueuse/core'
+import { Face, Vector } from 'kalidokit'
+import { Live2DModel } from 'pixi-live2d-display'
+import { computed, inject, nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 import { pluginRegisted } from '../logic/liveAvatar'
 
-const { Application } = (window as any).PIXI
 // const scale = inject(injectionSlideScale)!
 
 const props = defineProps({
@@ -22,7 +21,7 @@ const props = defineProps({
   zIndex: Number,
   display: Object,
 })
-
+const { Application } = (window as any).PIXI
 const serverVitarState = inject('vitarState') as ServerReactive<ServerVitarState>
 const { lerp } = Vector
 const { isPresenter } = useNav()
@@ -92,7 +91,7 @@ const modelUrl = computed(() =>
     ? props.model
     : 'https://raw.githubusercontent.com/Live2D/CubismWebSamples/develop/Samples/Resources/Hiyori/Hiyori.model3.json',
 )
-const setDisplay = () => {
+function setDisplay() {
   const scale = Math.max(0.1, display.scale / 10)
   const offsetX = (scale - 1) / 2 - display.offsetX / 20
   const offsetY = display.offsetY / 20
@@ -102,7 +101,7 @@ const setDisplay = () => {
     currentModel.y = -modelSize.value * offsetY
   }
 }
-const initDisplay = () => {
+function initDisplay() {
   display.scale = props.display!.scale * 10
   display.offsetX = props.display!.offsetX
   display.offsetY = props.display!.offsetY
@@ -135,8 +134,9 @@ async function initLive2D() {
   }
 }
 // draw connectors and landmarks on output canvas
-const drawResults = (points: any) => {
-  if (!props.showMesh || !meshView.value || !camView.value || !points) return
+function drawResults(points: any) {
+  if (!props.showMesh || !meshView.value || !camView.value || !points)
+    return
   meshView.value.width = camView.value.videoWidth
   meshView.value.height = camView.value.videoHeight
   const canvasCtx = meshView.value.getContext('2d')
@@ -148,33 +148,59 @@ const drawResults = (points: any) => {
     lineWidth: 1,
   })
   mpDrawing.drawConnectors(
-    canvasCtx!, points, mpFaceMesh.FACEMESH_RIGHT_EYE,
-    { color: '#FF3030' })
+    canvasCtx!,
+    points,
+    mpFaceMesh.FACEMESH_RIGHT_EYE,
+    { color: '#FF3030' },
+  )
   mpDrawing.drawConnectors(
-    canvasCtx!, points, mpFaceMesh.FACEMESH_RIGHT_EYEBROW,
-    { color: '#FF3030' })
+    canvasCtx!,
+    points,
+    mpFaceMesh.FACEMESH_RIGHT_EYEBROW,
+    { color: '#FF3030' },
+  )
   mpDrawing.drawConnectors(
-    canvasCtx!, points, mpFaceMesh.FACEMESH_LEFT_EYE,
-    { color: '#30FF30' })
+    canvasCtx!,
+    points,
+    mpFaceMesh.FACEMESH_LEFT_EYE,
+    { color: '#30FF30' },
+  )
   mpDrawing.drawConnectors(
-    canvasCtx!, points, mpFaceMesh.FACEMESH_LEFT_EYEBROW,
-    { color: '#30FF30' })
+    canvasCtx!,
+    points,
+    mpFaceMesh.FACEMESH_LEFT_EYEBROW,
+    { color: '#30FF30' },
+  )
   mpDrawing.drawConnectors(
-    canvasCtx!, points, mpFaceMesh.FACEMESH_FACE_OVAL,
-    { color: '#E0E0E0' })
+    canvasCtx!,
+    points,
+    mpFaceMesh.FACEMESH_FACE_OVAL,
+    { color: '#E0E0E0' },
+  )
   mpDrawing.drawConnectors(
-    canvasCtx!, points, mpFaceMesh.FACEMESH_LIPS, { color: '#E0E0E0' })
+    canvasCtx!,
+    points,
+    mpFaceMesh.FACEMESH_LIPS,
+    { color: '#E0E0E0' },
+  )
   mpDrawing.drawConnectors(
-    canvasCtx!, points, mpFaceMesh.FACEMESH_RIGHT_IRIS,
-    { color: '#FF3030' })
+    canvasCtx!,
+    points,
+    mpFaceMesh.FACEMESH_RIGHT_IRIS,
+    { color: '#FF3030' },
+  )
   mpDrawing.drawConnectors(
-    canvasCtx!, points, mpFaceMesh.FACEMESH_LEFT_IRIS,
-    { color: '#30FF30' })
+    canvasCtx!,
+    points,
+    mpFaceMesh.FACEMESH_LEFT_IRIS,
+    { color: '#30FF30' },
+  )
 }
 
 // update live2d model internal state
-const rigFace = (result: TFace|undefined, lerpAmount = 0.7) => {
-  if (!currentModel || !result) return
+function rigFace(result: TFace | undefined, lerpAmount = 0.7) {
+  if (!currentModel || !result)
+    return
   const coreModel: any = currentModel.internalModel.coreModel
 
   currentModel.internalModel.motionManager.update = () => {
@@ -246,8 +272,9 @@ const rigFace = (result: TFace|undefined, lerpAmount = 0.7) => {
   }
 }
 
-const animateLive2DModel = (points: any) => {
-  if (!currentModel || !points) return
+function animateLive2DModel(points: any) {
+  if (!currentModel || !points)
+    return
 
   let riggedFace
 
@@ -263,7 +290,7 @@ const animateLive2DModel = (points: any) => {
   }
 }
 
-const onResults = (results: any) => {
+function onResults(results: any) {
   if (!loaded.value && results.multiFaceLandmarks[0]) {
     loaded.value = true
     if (serverVitarState && !serverVitarState.sync)
@@ -305,7 +332,7 @@ async function initMediapipe() {
   faceMesh.onResults(onResults)
 
   camera = new mpCamera.Camera(camView.value!, {
-    onFrame: async() => {
+    onFrame: async () => {
       await faceMesh.send({ image: camView.value! })
     },
     width: 640,
@@ -333,7 +360,7 @@ watch(() => props.showMesh, () => {
   }
 })
 
-watch(() => props.model, async() => {
+watch(() => props.model, async () => {
   if (pixiApp && currentModel) {
     pixiApp.destroy(false, true)
     currentModel = null
@@ -364,7 +391,7 @@ watch(serverVitarState, (v) => {
     // console.log(v.data)
 })
 
-onMounted(async() => {
+onMounted(async () => {
   // register the Ticker to support automatic updating of Live2D models
   if (!pluginRegisted.value)
     pluginRegisted.value = true
@@ -375,7 +402,7 @@ onMounted(async() => {
   await initLive2D()
   await initMediapipe()
 })
-onUnmounted(async() => {
+onUnmounted(async () => {
   if (camera)
     await camera.stop()
   if (faceMesh)
@@ -391,7 +418,7 @@ onUnmounted(async() => {
   <div
     ref="container"
     class="fixed"
-    :style="[_containerStyle , {zIndex}]"
+    :style="[_containerStyle, { zIndex }]"
   >
     <div
       v-if="model"
@@ -409,22 +436,22 @@ onUnmounted(async() => {
       :style="handleStyle"
       :class="[
         handlerDown ? '!opacity-100' : '',
-        loaded ? 'bg-green-500 dark:(border bg-green-500)' :
-        (!isPresenter && serverVitarState.sync ? 'bg-blue-500 dark:(border bg-blue-500)' : 'bg-red-500 dark:(border bg-red-500)')
+        loaded ? 'bg-green-500 dark:(border bg-green-500)'
+        : (!isPresenter && serverVitarState.sync ? 'bg-blue-500 dark:(border bg-blue-500)' : 'bg-red-500 dark:(border bg-red-500)'),
       ]"
     />
     <div
       v-if="mediaPipe"
       class="absolute bottom-0"
       style="transform: rotateY(180deg);"
-      :style="[frameStyle, {right: `${size}px`}]"
+      :style="[frameStyle, { right: `${size}px` }]"
     >
       <video ref="camView" class="absolute bottom-0 left-0 w-full h-auto" />
       <canvas ref="meshView" class="absolute bottom-0 left-0 w-full h-auto" />
     </div>
     <div
       v-if="mediaPipe && showMesh && size > 120"
-      class="absolute top-0" :style="[frameStyle, {zIndex: zIndex! + 1, right: `${size}px`}]"
+      class="absolute top-0" :style="[frameStyle, { zIndex: zIndex! + 1, right: `${size}px` }]"
     >
       <div>
         s:
@@ -459,6 +486,7 @@ onUnmounted(async() => {
     </div>
   </div>
 </template>
+
 <style scoped>
 .vitar-btn {
   margin-right: 0.25rem;
