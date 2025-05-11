@@ -52,3 +52,8 @@ export class Subtitles {
   config: ResolvedSubtitlesConfig
   contents: Record<string, Record<string, Record<string, string[]>>>
 }
+
+export interface ServerVitarState {
+  sync: boolean
+  data: any
+}

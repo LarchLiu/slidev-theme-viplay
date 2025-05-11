@@ -6,8 +6,10 @@ import { Live2DModel } from 'pixi-live2d-display'
 import type { TFace } from 'kalidokit'
 import { Face, Vector } from 'kalidokit'
 import { useDraggable, useStorage } from '@vueuse/core'
-import { computed, nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
-import { pluginRegisted, serverVitarState } from '../logic/liveAvatar'
+import { computed, inject, nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
+import type { ServerReactive } from 'vite-plugin-vue-server-ref'
+import type { ServerVitarState } from 'types'
+import { pluginRegisted } from '../logic/liveAvatar'
 
 const { Application } = (window as any).PIXI
 // const scale = inject(injectionSlideScale)!
@@ -21,6 +23,7 @@ const props = defineProps({
   display: Object,
 })
 
+const serverVitarState = inject('vitarState') as ServerReactive<ServerVitarState>
 const { lerp } = Vector
 const { isPresenter } = useNav()
 const { $scale: scale } = useSlideContext()
@@ -255,14 +258,15 @@ const animateLive2DModel = (points: any) => {
       video: camView.value,
     })
     rigFace(riggedFace, 0.5)
-    serverVitarState.data = riggedFace
+    if (serverVitarState)
+      serverVitarState.data = riggedFace
   }
 }
 
 const onResults = (results: any) => {
   if (!loaded.value && results.multiFaceLandmarks[0]) {
     loaded.value = true
-    if (!serverVitarState.sync)
+    if (serverVitarState && !serverVitarState.sync)
       serverVitarState.sync = true
   }
   // serverVitarState.data = results.multiFaceLandmarks[0]

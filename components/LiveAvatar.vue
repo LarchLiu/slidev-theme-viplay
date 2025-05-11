@@ -1,10 +1,16 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref, watch } from 'vue'
+import { onMounted, provide, reactive, ref, watch } from 'vue'
 import { useNav } from '@slidev/client'
-import { displayModel, existAvatar, modelType, serverVitarState } from '../logic/liveAvatar'
+import type { ServerReactive } from 'vite-plugin-vue-server-ref'
+import type { ServerVitarState } from 'types'
+import { displayModel, existAvatar, modelType } from '../logic/liveAvatar'
 import Vitar from './Vitar.vue'
 
 const isDev = import.meta.env.MODE === 'development'
+
+const props = defineProps<{ vitarState: ServerReactive<ServerVitarState> }>()
+
+provide('vitarState', props.vitarState)
 
 const { isPresenter } = useNav()
 const modelUrl = ref('')
@@ -36,7 +42,7 @@ const setModel = (name: string) => {
     displayOpt.offsetY = 0
   }
 }
-watch(serverVitarState, (v) => {
+watch(() => props.vitarState, (v) => {
   if (v.sync && !displayModel.value)
     displayModel.value = 1
 })
@@ -50,7 +56,7 @@ watch(modelType, () => {
 onMounted(() => {
   if (isDev)
     existAvatar.value = true
-  if (serverVitarState.sync)
+  if (props.vitarState.sync)
     displayModel.value = 1
 })
 </script>

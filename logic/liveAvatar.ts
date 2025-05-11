@@ -1,15 +1,6 @@
 import { ref } from 'vue'
 import { useStorage } from '@vueuse/core'
-// @ts-expect-error - virtual module
-import _serverVitarState from 'server-reactive:vitar'
-import type { ServerReactive } from 'vite-plugin-vue-server-ref'
 
-interface ServerVitarState {
-  sync: boolean
-  data: any
-}
-
-export const serverVitarState = _serverVitarState as ServerReactive<ServerVitarState>
 export const models = ['Haru', 'Hiyori', 'Mark', 'Natori', 'Rice']
 export const modelType = useStorage('live-model-type', 'Hiyori')
 export const displayModel = ref(0)
