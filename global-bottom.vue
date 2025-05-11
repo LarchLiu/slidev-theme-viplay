@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { ServerReactive } from 'vite-plugin-vue-server-ref'
+// import type { ServerReactive } from 'vite-plugin-vue-server-ref'
 // @ts-expect-error - virtual module
 import _serverVitarState from 'server-reactive:vitar'
-import type { ServerVitarState } from './types'
+// import type { ServerVitarState } from './types'
 import { Subtitles } from './types'
 
-const serverVitarState = _serverVitarState as ServerReactive<ServerVitarState>
+// const serverVitarState = _serverVitarState as ServerReactive<ServerVitarState>
 const contents = {
   zh_CN: {
     page1: {
@@ -81,5 +81,5 @@ const subtitles = new Subtitles(contents, config)
 </script>
 <template>
   <slides-subtitle :subtitles="subtitles" />
-  <live-avatar :vitar-state="serverVitarState" />
+  <!-- <live-avatar :vitar-state="serverVitarState" /> -->
 </template>
