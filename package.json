@@ -1,6 +1,6 @@
 {
   "name": "slidev-theme-viplay",
-  "version": "0.0.4-beta.13",
+  "version": "0.0.4-beta.14",
   "private": false,
   "description": "Some components for slidev",
   "bugs": "https://github.com/LarchLiu/slidev-theme-viplay/issues",
@@ -29,8 +29,7 @@
     "pixi.js": "^6.2.2",
     "vue": "^3.5.13"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@antfu/eslint-config": "^0.18.0",
     "@antfu/ni": "^0.9.3",
