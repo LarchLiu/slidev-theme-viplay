@@ -25,8 +25,8 @@
     "lint": "eslint .",
     "export": "slidev export example.md",
     "screenshot": "slidev export example.md --format png",
-    "release": "zx scripts/release.mjs",
-    "ci:publish": "zx scripts/publish.mjs"
+    "release": "bumpp package.json --commit --push --tag",
+    "ci:publish": "pnpm publish --access public --no-git-checks"
   },
   "peerDependencies": {
     "@iconify-json/ic": "^1.2.2",
