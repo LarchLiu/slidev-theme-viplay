@@ -1,10 +1,51 @@
 <script setup lang="ts">
+import { useNav } from '@slidev/client'
 // import type { ServerReactive } from 'vite-plugin-vue-server-ref'
 // import _serverVitarState from 'server-reactive:vitar'
 // import type { ServerVitarState } from './types'
 import { Subtitles } from './types'
 
 // const serverVitarState = _serverVitarState as ServerReactive<ServerVitarState>
+interface FormatSubtitles {
+  [langKey: string]: {
+    [pageKey: string]: {
+      [clickKey: string]: string[]
+    }
+  }
+}
+interface OriginalSubtitles {
+  [clickKey: string]: {
+    [langKey: string]: string[]
+  }
+}
+const { slides } = useNav()
+const _contents: FormatSubtitles = {}
+for (const slide of slides.value) {
+  // console.log('slide:', slide)
+  if ((slide.meta.slide as any).frontmatter.subtitles) {
+    // console.log(`subtitles: ${slide.no}`, (slide.meta.slide as any).frontmatter.subtitles)
+    const subtitles: OriginalSubtitles = (slide.meta.slide as any).frontmatter.subtitles
+    const pageKey = `page${slide.no}`
+    const clickKeys = Object.keys(subtitles)
+    const langKeys = Object.keys(subtitles[clickKeys[0]])
+    for (const langKey of langKeys) {
+      for (const clickKey of clickKeys) {
+        if (subtitles[clickKey][langKey]) {
+          if (!_contents[langKey]) {
+            _contents[langKey] = {}
+          }
+          if (!_contents[langKey][pageKey]) {
+            _contents[langKey][pageKey] = {}
+          }
+          if (!_contents[langKey][pageKey][clickKey]) {
+            _contents[langKey][pageKey][clickKey] = []
+          }
+          _contents[langKey][pageKey][clickKey] = [...subtitles[clickKey][langKey]]
+        }
+      }
+    }
+  }
+}
 const contents = {
   zh_CN: {
     page1: {
@@ -69,8 +110,29 @@ const contents = {
     },
   },
 }
+const fullContents = JSON.parse(JSON.stringify(contents))
+for (const langKey in _contents) {
+  if (!fullContents[langKey]) {
+    fullContents[langKey] = {}
+  }
+  for (const pageKey in _contents[langKey]) {
+    if (!fullContents[langKey][pageKey]) {
+      fullContents[langKey][pageKey] = {}
+    }
+    for (const clickKey in _contents[langKey][pageKey]) {
+      if (!fullContents[langKey][pageKey][clickKey]) {
+        fullContents[langKey][pageKey][clickKey] = []
+      }
+      // Merge arrays while preserving order
+      fullContents[langKey][pageKey][clickKey] = [
+        ...fullContents[langKey][pageKey][clickKey],
+        ..._contents[langKey][pageKey][clickKey],
+      ]
+    }
+  }
+}
 const config = {
-  noTTSDelay: 5000,
+  noTTSDelay: 2000,
   ttsApi: 'http://openai.fm/api/generate',
   ttsLangName: {
     en: 'English(US)',
@@ -84,7 +146,7 @@ const config = {
     en: [{ value: 'ash', display: 'Ash' }, { value: 'nova', display: 'Nova' }],
   },
 }
-const subtitles = new Subtitles(contents, config)
+const subtitles = new Subtitles(fullContents, config)
 </script>
 
 <template>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Subtitles } from '../types'
 import { useNav } from '@slidev/client'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { audioSrc, ccDisplay, currentTTSLang, currentTTSModel, existSubtitle, isFirstTime, isPlay, subtitlesConfig } from '../logic/subtitle'
 // import { downloadTTS } from '../utils'
 
@@ -55,8 +55,7 @@ function createTimer() {
 
 function initSubtitle() {
   subtitleIdx.value = -1
-  if (timer)
-    clearTimeout(timer)
+  pause()
   if (contents.value
     && contents.value[language.value][page.value]
     && contents.value[language.value][page.value][click.value]
@@ -73,8 +72,7 @@ function initSubtitle() {
 }
 
 function resetSubtitle() {
-  if (timer)
-    clearTimeout(timer)
+  pause()
   if (contents.value
     && contents.value[language.value][page.value]
     && contents.value[language.value][page.value][click.value]
@@ -112,19 +110,24 @@ function onAudioEnded() {
 }
 
 function play() {
-  if (audio.value) {
-    if (curSubtitle.value) {
-      audio.value.src = audioSrc(curSubtitle.value)
-      subtitleDisplay.value = true
-      audio.value.play()
+  if (timer)
+    clearTimeout(timer)
+
+  nextTick(() => {
+    if (audio.value) {
+      if (curSubtitle.value) {
+        audio.value.src = audioSrc(curSubtitle.value)
+        subtitleDisplay.value = true
+        audio.value.play()
+      }
+      else {
+        onAudioEnded()
+      }
     }
     else {
-      onAudioEnded()
+      createTimer()
     }
-  }
-  else {
-    createTimer()
-  }
+  })
 }
 
 function pause() {
