@@ -15,6 +15,13 @@ const {
   fontSize,
 } = config.value
 
+if (!props.subtitles.config.ttsLanguages.find(i => i === currentTTSLang.value)) {
+  if (props.subtitles.config.ttsLanguages[0])
+    currentTTSLang.value = props.subtitles.config.ttsLanguages[0]
+}
+
+currentTTSModel.value = props.subtitles.config.ttsModel[currentTTSLang.value][0].value
+
 const { clicks, currentPage, go, hasNext, next } = useNav()
 const subtitleIdx = ref(-1)
 const subtitleCount = ref(0)

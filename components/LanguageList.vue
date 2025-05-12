@@ -10,11 +10,6 @@ function getLangName(str: string) {
   return props.config.ttsLangName[str] || str
 }
 
-if (!props.config.ttsLanguages.find(i => i === currentTTSLang.value)) {
-  if (props.config.ttsLanguages[0])
-    currentTTSLang.value = props.config.ttsLanguages[0]
-}
-
 const languagesItems = computed<SelectionItem<string>[]>(() => [
   ...props.config.ttsLanguages.map(v => ({
     value: v,
@@ -27,7 +22,6 @@ const modelItems = computed<SelectionItem<string>[]>(() => [
     display: v.display,
   })),
 ])
-currentTTSModel.value = modelItems.value[0].value
 
 const ccDisplayItems: SelectionItem<number>[] = [{ value: 1, display: 'True' }, { value: 0, display: 'False' }]
 
