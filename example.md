@@ -1,6 +1,8 @@
 ---
 theme: ./
 selectable: true
+layout: image-right
+image: 'https://cover.sli.dev'
 ---
 
 # Slidev Theme Viplay

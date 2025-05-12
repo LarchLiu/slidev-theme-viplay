@@ -7,19 +7,19 @@ Some components for [Slidev](https://github.com/slidevjs/slidev).
 ## Installation
 
 ```bash
-$ npm i slidev-theme-viplay --save
+npm i slidev-theme-viplay --save
 ```
 
 or
 
 ```bash
-$ yarn add slidev-theme-viplay
+yarn add slidev-theme-viplay
 ```
 
 or
 
 ```bash
-$ pnpm i slidev-theme-viplay
+pnpm i slidev-theme-viplay
 ```
 
 ## Components
@@ -32,7 +32,7 @@ This theme provides the following components:
 
 ### SlidesSubtitle
 
-Create a `./global-bottom.vue` file in your `Slidev` project and use the component:
+Create a `./global-top.vue` file in your `Slidev` project and use the component:
 
 ```vue
 <script setup lang="ts">
