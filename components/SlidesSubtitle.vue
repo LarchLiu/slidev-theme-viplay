@@ -162,7 +162,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="abs-b text-center">
+  <div class="abs-b text-center z-10">
     <div v-if="contents && contents[language] && contents[language][page] && contents[language][page][click]">
       <span v-if="subtitleDisplay && ccDisplay && curSubtitle" class="px-2" :style="{ background, color, fontSize }">{{ curSubtitle }}</span>
       <audio ref="audio" @ended="onAudioEnded" />

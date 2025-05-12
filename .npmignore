@@ -10,7 +10,9 @@ components.d.ts
 .vscode
 .eslintrc
 global-bottom.vue
+global-top.vue
 pnpm-lock.yaml
 vite.config.ts
 example.md
 scripts/
+eslint_config.js
