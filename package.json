@@ -1,7 +1,7 @@
 {
   "name": "slidev-theme-viplay",
   "type": "module",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "private": false,
   "description": "Some components for slidev",
   "author": "alex <larch.liu@gmail.com>",
