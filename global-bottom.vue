@@ -71,9 +71,17 @@ const contents = {
 }
 const config = {
   noTTSDelay: 5000,
-  ttsApi: 'http://localhost:3000/api/v1/tts',
+  ttsApi: 'http://openai.fm/api/generate',
   ttsLangName: {
     en: 'English(US)',
+  },
+  apiCustom: {
+    model: 'voice',
+    prompt: 'You are a slide presenter, please read the text in a clear manner',
+  },
+  ttsModel: {
+    zh_CN: [{ value: 'onyx', display: 'Onyx' }, { value: 'sage', display: 'Sage' }],
+    en: [{ value: 'ash', display: 'Ash' }, { value: 'nova', display: 'Nova' }],
   },
 }
 const subtitles = new Subtitles(contents, config)

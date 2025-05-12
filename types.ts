@@ -8,7 +8,11 @@ export interface SubtitlesConfig {
   ttsApi?: string
   ttsLanguages?: string[]
   ttsLangName?: Record<string, string>
-  ttsModel?: Record<string, string[]>
+  ttsModel?: Record<string, TTSModel[]>
+}
+export interface TTSModel {
+  value: string
+  display: string
 }
 export interface ResolvedSubtitlesConfig {
   apiCustom: Record<string, string>
@@ -21,7 +25,7 @@ export interface ResolvedSubtitlesConfig {
   ttsApi: string
   ttsLanguages: string[]
   ttsLangName: Record<string, string>
-  ttsModel: Record<string, string[]>
+  ttsModel: Record<string, TTSModel[]>
 }
 const defaultConfig = {
   apiCustom: {},
@@ -33,7 +37,7 @@ const defaultConfig = {
   fontSize: '1em',
   ttsApi: '/api/tts',
   ttsLangName: { zh_CN: '中文', en: 'English' },
-  ttsModel: { zh_CN: ['Male', 'Female'], en: ['Male', 'Female'] },
+  ttsModel: { zh_CN: [{ value: 'zh_CN_Male', display: 'Male' }, { value: 'zh_CN_Female', display: 'Female' }], en: [{ value: 'en_Male', display: 'Male' }, { value: 'en_Female', display: 'Female' }] },
 }
 export class Subtitles {
   constructor(contents: Record<string, Record<string, Record<string, string[]>>>, config?: SubtitlesConfig) {

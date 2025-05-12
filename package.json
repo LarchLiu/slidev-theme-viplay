@@ -1,5 +1,6 @@
 {
   "name": "slidev-theme-viplay",
+  "type": "module",
   "version": "0.0.5",
   "private": false,
   "description": "Some components for slidev",
