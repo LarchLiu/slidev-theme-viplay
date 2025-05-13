@@ -2,7 +2,49 @@
 theme: ./
 selectable: true
 layout: image-right
-image: 'https://cover.sli.dev'
+image: "https://cover.sli.dev"
+subtitlesConfig:
+  {
+    noTTSDelay: 2000,
+    ttsApi: "http://openai.fm/api/generate",
+    ttsLangName: { en: "English(US)", zh_CN: "中文(简体)" },
+    apiCustom:
+      {
+        model: "voice",
+        prompt: "You are a slide presenter, please read the text in a clear manner",
+      },
+    ttsModel:
+      {
+        zh_CN:
+          [
+            { value: "onyx", display: "Onyx" },
+            { value: "sage", display: "Sage" },
+          ],
+        en:
+          [
+            { value: "ash", display: "Ash" },
+            { value: "nova", display: "Nova" },
+          ],
+      },
+  }
+subtitles:
+  {
+    click0:
+      {
+        zh_CN:
+          [
+            "大家好，欢迎来到Slidev",
+            "今天讲一下Slidev的特点和用法",
+            "让我们开始吧/D/1000",
+          ],
+        en:
+          [
+            "Hello everyone, welcome to Slidev!",
+            "Now i will talk about the features and usage of Slidev.",
+            "Let's get started./D/1000",
+          ],
+      },
+  }
 ---
 
 # Slidev Theme Viplay
@@ -15,6 +57,35 @@ Presentation slides for developers
   </span>
 </div>
 
+---
+subtitles:
+  {
+    click0:
+      {
+        zh_CN:
+          [
+            "/D/1000",
+            "那什么是Slidev呢?/D/1500",
+            "Slidev是一个为开发者设计的幻灯片制作和演示器，包括以下功能",
+            "用Markdown专注于内容，然后再对它们进行样式设计",
+            "主题可以与npm包共享和使用",
+            "代码高亮，带自动完成的实时编码",
+            "嵌入Vue组件以增强你的表达能力",
+            "网页上的一切可能",
+          ],
+        en:
+          [
+            "/D/1000",
+            "So what is Slidev?/D/1500",
+            "Slidev is a slides maker and presenter designed for developers, consist of the following features",
+            "Focus on the content with Markdown, and then style them later",
+            "Theme can be shared and used with npm packages",
+            "Code highlighting, live coding with autocompletion",
+            "Embedding Vue components to enhance your expressions",
+            "Anything possible on a webpage",
+          ],
+      },
+  }
 ---
 
 # What is Slidev?
@@ -34,6 +105,36 @@ Slidev is a slides maker and presenter designed for developers, consist of the f
 
 Read more about [Why Slidev?](https://sli.dev/guide/why)
 
+---
+subtitles:
+  {
+    click0:
+      {
+        zh_CN:
+          [
+            "下面我们讲一下导航的设置",
+            "系统提供了快捷键设置，如表所示可以快速切换页面或动画",
+          ],
+        en:
+          [
+            "Now we will talk about the navigation settings",
+            "The system provides shortcut settings, as shown in the table, to quickly switch pages or animations",
+          ],
+      },
+    click1:
+      {
+        zh_CN:
+          [
+            "在左下角悬停可以看到导航的控制面板",
+            "点击按钮可以快速切换到下一页或上一页",
+          ],
+        en:
+          [
+            "Hover on the bottom-left corner to see the navigation's controls panel",
+            "Click the button to quickly switch to the next or previous page",
+          ],
+      },
+  }
 ---
 
 # Navigation
@@ -59,7 +160,7 @@ Hover on the bottom-left corner to see the navigation's controls panel
 
 ---
 layout: image-right
-image: 'https://cover.sli.dev'
+image: "https://cover.sli.dev"
 ---
 
 # Code
