@@ -69,5 +69,21 @@
       },
       "hightlighter": "prism"
     }
+  },
+  "prettier": {
+    "semi": false,
+    "overrides": [
+      {
+        "files": [
+          "example.md"
+        ],
+        "options": {
+          "parser": "slidev",
+          "plugins": [
+            "prettier-plugin-slidev"
+          ]
+        }
+      }
+    ]
   }
 }
