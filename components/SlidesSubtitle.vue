@@ -98,7 +98,7 @@ function onAudioEnded() {
   timer = window.setTimeout(() => {
     if (subtitleIdx.value + 1 >= subtitleCount.value) {
       if (!hasNext.value)
-        isPlay.value = false
+        createTimer()
       else
         next()
     }
