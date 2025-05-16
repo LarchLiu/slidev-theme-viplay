@@ -29,7 +29,7 @@ subtitlesConfig:
   }
 subtitles:
   {
-    click0:
+    default:
       {
         zh_CN:
           [
@@ -60,7 +60,7 @@ Presentation slides for developers
 ---
 subtitles:
   {
-    click0:
+    default:
       {
         zh_CN:
           [
@@ -108,7 +108,7 @@ Read more about [Why Slidev?](https://sli.dev/guide/why)
 ---
 subtitles:
   {
-    click0:
+    default:
       {
         zh_CN:
           [
@@ -185,6 +185,7 @@ function updateUser(id: number, update: Partial<User>) {
 ---
 layout: center
 class: text-center
+subtitles: { default: { zh_CN: ["谢谢，再见"], en: ["Thanks, bye"] } }
 ---
 
 # Learn More
