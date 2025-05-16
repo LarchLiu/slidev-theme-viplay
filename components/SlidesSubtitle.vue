@@ -31,7 +31,7 @@ const delay = ref(0)
 const audio = ref()
 const language = computed(() => currentTTSLang.value)
 const page = computed(() => `page${currentPage.value}`)
-const click = computed(() => `click${clicks.value}`)
+const click = computed(() => clicks.value > 0 ? `click${clicks.value}` : 'default')
 let timer = 0
 
 function parseSubtitle() {
