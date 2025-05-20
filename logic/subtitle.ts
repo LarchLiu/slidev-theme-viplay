@@ -5,8 +5,8 @@ import { ref } from 'vue'
 
 export const isFirstTime = ref(true)
 export const isPlay = ref(false)
-export const currentTTSLang = useStorage<string>('slidev-tts-lang', 'zh_CN')
-export const currentTTSModel = useStorage<string>('slidev-tts-model', 'zh_CN_Male')
+export const currentTTSLang = useStorage<string>('slidev-tts-lang', 'en')
+export const currentTTSModel = useStorage<string>('slidev-tts-model', 'en_Male')
 export const ccDisplay = useStorage<number>('slidev-cc-display', 1)
 export const subtitlesConfig = ref<ResolvedSubtitlesConfig | undefined>()
 export const existSubtitle = ref(false)
